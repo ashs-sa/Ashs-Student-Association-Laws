@@ -6,7 +6,7 @@
 ```
 Ashs-Student-Association-Laws/
 ├── .git/
-├── .github/
+├── .github/ 
 ├── node_modules/
 ├── public/                         # 對外提供的靜態網站內容
 │   ├── index.html
