@@ -108,6 +108,7 @@ p {
     color: var(--color-primary); 
     /* border-bottom: 3px solid var(--color-primary); */
     padding-left: 0.8rem; 
+    padding-right: 0.8rem; 
     padding-bottom: 0.6rem;
     margin-top: 0; /* 移除預設的上邊距 */
     /* margin-bottom: 1.5rem; */
@@ -143,29 +144,18 @@ p {
 .law-list > li  > .law-name {
     @apply text-lg/8 text-base-content/75 font-medium tracking-wide line-clamp-1 /* 棄用：opacity-60 */
 }
-.law-list > .list-row > a {
-    @apply decoration-accent/0
+/* .law-list > .list-row > a {
+    @apply transition-colors duration-550 decoration-accent/0
+} */
+.law-list > .list-row > a, .law-list > .list-row > a:hover{
+    @apply transition-colors duration-300/* 這邊的值是有底線 → 無底線的時間 */ underline underline-offset-[-0.5rem] decoration-accent/0  decoration-wavy decoration-4
 }
 .law-list > .list-row > a:hover {
-    @apply transition-colors duration-550 underline underline-offset-[-0.5rem] decoration-accent/25  decoration-wavy decoration-4
+    @apply decoration-accent/25 duration-550/* 這邊的值是「無」底線 → 有底線的時間 */
 }
 /* .law-list > li  > svg {
     @apply size-[1.2em]
 } */
-
-/* .main-content a, */
-.regulation-list li a {
-    text-decoration: none;
-    color: var(--color-primary	);
-    transition: color 0.2s ease;
-    font-weight: 500;
-}
-/* .main-content a:hover, */
-.regulation-list li a:hover,
-.regulation-list li a:focus {
-    color: var(--color-primary	);
-    text-decoration: underline; /* 懸停時加底線 */
-}
 
 /* --- 備註星號列點 --- */
 .remarks-content{
@@ -303,7 +293,7 @@ a[target="_blank"]::after {
     position: relative;
 }
 
-/* --- 修法歷程樣式 --- */
+/* --- 修法歷程、附件選單樣式 --- */
 .amendment-history, .attachments-list {
     /* background-color: #f9f9f9; 淺灰色背景，與主要內容區隔 */
     background-color: var(--color-base-200	);
@@ -338,77 +328,15 @@ a[target="_blank"]::after {
     /*display: flex; /* 使用 Flexbox 方便對齊日期和描述 */
     /*gap: 1rem; /* 日期和描述之間的間距 */
 }
-/*.amendment-date {*/
-/*    color: #555;*/
-/*    font-weight: bold;*/
-/*    width: 100px; /* 固定日期寬度，方便對齊 */
-/*    flex-shrink: 0; /* 防止日期被壓縮 */
-/*}*/
-/*.amendment-description {
+/* .amendment-date {
+    color: #555;
+    font-weight: bold;
+    width: 100px; 固定日期寬度，方便對齊
+    flex-shrink: 0; 防止日期被壓縮
+}
+.amendment-description {
     color: var(--text-color);
-}*/
-
-/* --- 法規注意事項樣式 --- */
-.notice {
-    /* color: #a42f0e; 較深色的文字顏色 */
-    color: var(--color-error);
-    /* background-color: #fdece8; 淺橘色背景，與主要內容區隔 */
-    background-color: var(--color-error-content);
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.5rem;
-    border-left: 4px solid #ef572e; /* 左側橘色標示線 */
-    border-radius: 4px;
-    font-size: 0.95rem;
-    /* font-weight: 440; */
-}
-.notice h3 {
-    color: var(--color-error);
-    margin-top: 0;
-    margin-bottom: 0.3rem;
-    font-size: 0.95rem;
-    font-weight: 650;
-    padding-left: 0; /* 移除原本 h3 的左側裝飾線 */
-    border-left: none;
-}
-.notice p {
-    margin-left: 1rem; /* 內容左側縮排 */
-}
-
-/* --- 法規內容樣式 --- */
-.regulation-content h3 {
-    /* color: #343a40; */
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    border-left: 4px solid var(--color-primary	); /* 左側裝飾線 */
-    padding-left: 0.8rem;
-    font-weight: 600;
-    /* color: #555; */
-    font-size: 1.3rem;
-}
-.regulation-content h4 {
-    margin: 1.7rem auto 1.15rem;
-    /* color: #555; */
-    font-weight: 550;
-    font-size: 1.15rem;
-    word-break: keep-all; 
-}
-.regulation-content h4::before {
-    font-family: "Noto Sans";
-    content: "• "; /* 這裡的 "• " 就是你要加的點和一個空格 */
-    color: var(--color-primary	);
-    font-weight: 900;
-    margin-right: 0.45rem; /* 在編號和內容之間添加一些間距 */    
-    /* font-size: 1.2em;
-    vertical-align: middle;
-    margin-right: 0.3em;
-     */
-}
-.regulation-content p {
-    /*margin-bottom: 1rem;*/
-    text-align: justify; /* 左右對齊 */
-}
-
+} */
 
 /* 附件清單樣式 */
 .attachments {
@@ -447,7 +375,7 @@ a[target="_blank"]::after {
 .attachments li::before {
     font-family: "Noto Sans";
     /* color: #b4a69f; */
-    color: var(--color-secondary-content);
+    color: var(--color-secondary);
     font-weight: 900;
     content: "• "; 
     position: relative; /* 相對於 li 元素定位 */
@@ -467,19 +395,78 @@ a[target="_blank"]::after {
     word-break: break-word;
     display: inline-block !important; /* 覆蓋之前的 display */
 }
+.attachments > li > a[target="_blank"]::after {
+    content: "";
+}
+.attachments > li > a[target="_blank"] > .att-title::after {
+    content: "\e89e"; /* 新視窗開啟網站符號 */
+    font-family: 'Material Symbols Outlined'; /* Google Material Symbols */
+    font-weight: inherit; 
+    font-style: normal; 
+    font-size: 1.1rem; /* 調整圖標大小，使其與文字協調 */
+    line-height: 0rem; /* 使按鈕文字不改變 */
+    margin-left: 0.1em; /* 與文字的間距 */
+    vertical-align: middle; /* middle: 垂直對齊 / super: 稍微抬高位置 */
+    /* color: inherit; 圖標顏色 */
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' -25,
+        'opsz' 20;
+    }
+
+
+/* --- 法規編章節、內文樣式 --- */
+.regulation-content h3 {
+    /* color: #343a40; */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    border-left: 4px solid var(--color-primary	); /* 左側裝飾線 */
+    padding-left: 0.8rem;
+    font-weight: 600;
+    /* color: #555; */
+    font-size: 1.3rem;
+}
+.regulation-content h4 {
+    margin: 1.7rem auto 1.15rem;
+    /* color: #555; */
+    font-weight: 550;
+    font-size: 1.15rem;
+    word-break: keep-all; 
+}
+.regulation-content h4::before {
+    font-family: "Noto Sans";
+    content: "• ";
+    color: var(--color-primary	);
+    font-weight: 900;
+    margin-right: 0.45rem; /* 在編號和內容之間添加一些間距 */    
+    /* font-size: 1.2em;
+    vertical-align: middle;
+    margin-right: 0.3em;
+     */
+}
+.regulation-content p {
+    /*margin-bottom: 1rem;*/
+    text-align: justify; /* 左右對齊 */
+}
+
+
 
 /* --- toast 通知樣式設定 --- */
 .toast-success {
-    background-color: var(--color-primary) !important;
-    color: white !important;
+    background-color: var(--color-secondary) !important;
+    color: var(--color-secondary-content) !important;
     /*opacity: 1 !important;*/
 }
-.toast-success .toast-title {
-    color: white !important;
-}
+.toast-success .toast-title,
 .toast-success .toast-message {
-    color: white !important;
+    color: var(--color-secondary-content) !important;
 }
+/* #toast-container > .toast-success{
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m4.5 12.75 6 6 9-13.5'/%3E%3C/svg%3E") !important;
+    color: var(--color-secondary-content) !important;
+} */
 
 /* --- 響應式調整 (手機橫向或小平板) --- */
 @media (max-width: 768px) {
