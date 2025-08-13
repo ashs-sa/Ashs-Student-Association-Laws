@@ -4,7 +4,15 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,slnt,GRAD@8..144,0,150&display=swap');*/
 @import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
-
+/* 未來熒黑 */
+@font-face {
+    font-family: 'GlowSans';
+    src:
+        url('../fonts/GlowSansTCCompressed-Bold.woff2') format('woff2'),
+        url('../fonts/GlowSansTCCompressed-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
 /* import Daisy UI */
 @import "tailwindcss" ;
 /* @source "./node_modules/daisyui/*.{html,js}"; */
@@ -210,12 +218,14 @@ a[target="_blank"]::after {
 .art {
     /* color: #555; */
     font-weight: bold;
-    font-family: "Noto Sans", "Noto Sans TC";
+    font-family: "Noto Sans", "GlowSans", "Noto Sans TC";
     letter-spacing: 0.05em;
     word-spacing: 0.5em;
     width: 3.5em; /* 縮小條號寬度，以便容納更長的縮排 */
     flex-shrink: 0; /* 防止條號被壓縮 */
     word-break: keep-all;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.01); /* 用陰影使文字平滑 */
+    -webkit-font-smoothing: antialiased; /* 文字顯示反鋸齒 */
 }
 .art-data {
     margin: 0 0 0.4rem 0.3rem;
@@ -299,7 +309,7 @@ a[target="_blank"]::after {
 }
 .oldArt {
     font-weight: bold;
-    font-family: "Noto Sans TC", sans-serif;
+    font-family: /*"GlowSans", */"Noto Sans TC", sans-serif;
     flex-shrink: 0; /* 防止條號被壓縮 */
     word-break: keep-all;
     counter-increment: oldArtNo; /* 計數器每次遇到 oldArt 都會加一 */
@@ -338,6 +348,11 @@ a[target="_blank"]::after {
 .tableBut直書{
     writing-mode: vertical-lr; /* 用於表格的文字垂直書寫 */
     text-align: center;
+}
+
+/* 選罷法插入公式 */
+mjx-container > svg{
+    display:inline;
 }
 
 /* --- 修法歷程、附件選單樣式 --- */
